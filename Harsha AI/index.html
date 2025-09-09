@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harsha AI - Empowering India's Digital Evolution</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1d7b86">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="nav__brand">
+                    <span class="logo">🇮🇳</span>
+                    <h1 class="brand-name">Harsha AI</h1>
+                </div>
+                <div class="nav__controls">
+                    <select id="languageSelector" class="form-control nav__select">
+                        <option value="en">English</option>
+                        <option value="hi">हिंदी</option>
+                        <option value="ta">தமிழ்</option>
+                        <option value="te">తెలుగు</option>
+                        <option value="kn">ಕನ್ನಡ</option>
+                        <option value="ml">മലയാളം</option>
+                        <option value="bn">বাংলা</option>
+                        <option value="gu">ગુજરાતી</option>
+                        <option value="mr">मराठी</option>
+                        <option value="pa">ਪੰਜਾਬੀ</option>
+                    </select>
+                    <button id="voiceBtn" class="btn btn--secondary">
+                        <span id="voiceIcon">🎤</span>
+                        <span data-translate="voice">Voice</span>
+                    </button>
+                    <button id="themeToggle" class="btn btn--outline">
+                        <span id="themeIcon">🌙</span>
+                    </button>
+                    <button id="accessibilityBtn" class="btn btn--outline">
+                        <span>♿</span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Offline Indicator -->
+    <div id="offlineIndicator" class="offline-indicator hidden">
+        <span>📡 Offline Mode - Limited functionality available</span>
+    </div>
+
+    <!-- Main Content -->
+    <main id="mainContent">
+        <!-- Landing Page -->
+        <section id="landing" class="hero">
+            <div class="container">
+                <div class="hero__content">
+                    <h1 class="hero__title" data-translate="heroTitle">
+                        Empowering India's Digital Evolution
+                    </h1>
+                    <p class="hero__subtitle" data-translate="heroSubtitle">
+                        India's most comprehensive GenAI platform serving millions across 22 languages and 6 critical domains
+                    </p>
+                    <div class="hero__actions">
+                        <button class="btn btn--primary btn--lg" data-translate="getStarted" onclick="showSection('domains')">
+                            Get Started
+                        </button>
+                        <button class="btn btn--outline btn--lg" data-translate="exploreDemos" onclick="showSection('dashboard')">
+                            Explore Demos
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Key Statistics -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-card__value">8.5M+</div>
+                        <div class="stat-card__label" data-translate="totalUsers">Total Users</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card__value">6</div>
+                        <div class="stat-card__label" data-translate="domainsActive">Active Domains</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card__value">22</div>
+                        <div class="stat-card__label" data-translate="languages">Languages</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card__value">65%</div>
+                        <div class="stat-card__label" data-translate="ruralReach">Rural Reach</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Domains Section -->
+        <section id="domains" class="section hidden">
+            <div class="container">
+                <h2 class="section__title" data-translate="ourDomains">Our Domains</h2>
+                <div class="domains-grid" id="domainsGrid">
+                    <!-- Domains will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Domain Detail Views -->
+        <section id="domainDetail" class="section hidden">
+            <div class="container">
+                <button class="btn btn--outline mb-16" onclick="showSection('domains')">
+                    ← <span data-translate="backToDomains">Back to Domains</span>
+                </button>
+                <div id="domainDetailContent">
+                    <!-- Dynamic domain content -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section hidden">
+            <div class="container">
+                <h2 class="section__title" data-translate="realtimeDashboard">Real-time Dashboard</h2>
+                
+                <!-- Real-time Metrics -->
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <h3 data-translate="activeUsers">Active Users</h3>
+                        <div class="metric-value" id="activeUsersMetric">125,420</div>
+                        <div class="metric-trend">↗️ +12% from yesterday</div>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3 data-translate="aiInteractions">AI Interactions</h3>
+                        <div class="metric-value" id="aiInteractionsMetric">2,847,392</div>
+                        <div class="metric-trend">↗️ +8% from yesterday</div>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3 data-translate="emergencyAlerts">Emergency Alerts</h3>
+                        <div class="metric-value emergency" id="emergencyAlertsMetric">234</div>
+                        <div class="metric-trend">⚠️ High priority</div>
+                    </div>
+                </div>
+
+                <!-- Charts -->
+                <div class="charts-grid">
+                    <div class="chart-container">
+                        <h3 data-translate="domainUsage">Domain Usage Distribution</h3>
+                        <div class="chart-wrapper" style="position: relative; height: 300px;">
+                            <canvas id="domainChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <h3 data-translate="languageDistribution">Language Distribution</h3>
+                        <div class="chart-wrapper" style="position: relative; height: 300px;">
+                            <canvas id="languageChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Success Stories -->
+        <section id="stories" class="section hidden">
+            <div class="container">
+                <h2 class="section__title" data-translate="successStories">Success Stories</h2>
+                <div class="stories-grid" id="storiesGrid">
+                    <!-- Stories will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Admin Section -->
+        <section id="admin" class="section hidden">
+            <div class="container">
+                <h2 class="section__title" data-translate="adminDashboard">Admin Dashboard</h2>
+                <div class="admin-grid">
+                    <div class="admin-panel">
+                        <h3 data-translate="userManagement">User Management</h3>
+                        <div class="admin-stats">
+                            <div>New Users Today: <strong>1,247</strong></div>
+                            <div>Active Sessions: <strong>8,456</strong></div>
+                            <div>Premium Users: <strong>234,567</strong></div>
+                        </div>
+                    </div>
+                    <div class="admin-panel">
+                        <h3 data-translate="systemHealth">System Health</h3>
+                        <div class="health-indicators">
+                            <div class="health-item">
+                                <span>API Response Time</span>
+                                <span class="status status--success">120ms</span>
+                            </div>
+                            <div class="health-item">
+                                <span>Server Uptime</span>
+                                <span class="status status--success">99.9%</span>
+                            </div>
+                            <div class="health-item">
+                                <span>Database Load</span>
+                                <span class="status status--warning">78%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Chat Interface Modal -->
+    <div id="chatModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="chatTitle">AI Assistant</h3>
+                <button class="modal-close" onclick="closeChatModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="chatMessages" class="chat-messages">
+                    <div class="chat-message bot">
+                        <span data-translate="chatWelcome">Hello! How can I help you today?</span>
+                    </div>
+                </div>
+                <div class="chat-input-container">
+                    <input type="text" id="chatInput" class="form-control" placeholder="Type your message...">
+                    <button id="sendBtn" class="btn btn--primary">
+                        <span data-translate="send">Send</span>
+                    </button>
+                    <button id="voiceChatBtn" class="btn btn--secondary">
+                        🎤
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility Panel -->
+    <div id="accessibilityPanel" class="accessibility-panel hidden">
+        <div class="panel-content">
+            <h3 data-translate="accessibilitySettings">Accessibility Settings</h3>
+            <div class="accessibility-controls">
+                <div class="control-group">
+                    <label data-translate="fontSize">Font Size</label>
+                    <select id="fontSizeSelect" class="form-control">
+                        <option value="small">Small</option>
+                        <option value="normal" selected>Normal</option>
+                        <option value="large">Large</option>
+                        <option value="xlarge">Extra Large</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label data-translate="contrast">High Contrast</label>
+                    <button id="contrastToggle" class="btn btn--outline">
+                        <span data-translate="toggle">Toggle</span>
+                    </button>
+                </div>
+                <div class="control-group">
+                    <label data-translate="voiceAssist">Voice Assistant</label>
+                    <button id="voiceAssistToggle" class="btn btn--outline">
+                        <span data-translate="enable">Enable</span>
+                    </button>
+                </div>
+            </div>
+            <button class="btn btn--secondary" onclick="closeAccessibilityPanel()">
+                <span data-translate="close">Close</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bottom-nav">
+        <button class="nav-item" onclick="showSection('landing')">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-label" data-translate="home">Home</span>
+        </button>
+        <button class="nav-item" onclick="showSection('domains')">
+            <span class="nav-icon">🎯</span>
+            <span class="nav-label" data-translate="domains">Domains</span>
+        </button>
+        <button class="nav-item" onclick="showSection('dashboard')">
+            <span class="nav-icon">📊</span>
+            <span class="nav-label" data-translate="dashboard">Dashboard</span>
+        </button>
+        <button class="nav-item" onclick="showSection('stories')">
+            <span class="nav-icon">⭐</span>
+            <span class="nav-label" data-translate="stories">Stories</span>
+        </button>
+        <button class="nav-item" onclick="showSection('admin')">
+            <span class="nav-icon">⚙️</span>
+            <span class="nav-label" data-translate="admin">Admin</span>
+        </button>
+    </nav>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="loading-spinner hidden">
+        <div class="spinner"></div>
+        <p data-translate="loading">Loading...</p>
+    </div>
+
+    <!-- Notifications -->
+    <div id="notificationContainer" class="notification-container"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
