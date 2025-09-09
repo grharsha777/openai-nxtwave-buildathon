@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentara AI - Educational Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <span class="logo-icon">🧠</span>
+                <span class="logo-text">Mentara AI</span>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="#" data-page="dashboard" class="nav-link active">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-text">Dashboard</span>
+                </a></li>
+                <li><a href="#" data-page="chat" class="nav-link">
+                    <span class="nav-icon">💬</span>
+                    <span class="nav-text">AI Assistant</span>
+                </a></li>
+                <li><a href="#" data-page="library" class="nav-link">
+                    <span class="nav-icon">📚</span>
+                    <span class="nav-text">Content Library</span>
+                </a></li>
+                <li><a href="#" data-page="learning" class="nav-link">
+                    <span class="nav-icon">🎓</span>
+                    <span class="nav-text">Interactive Learning</span>
+                </a></li>
+                <li><a href="#" data-page="calculator" class="nav-link">
+                    <span class="nav-icon">🔢</span>
+                    <span class="nav-text">Calculator</span>
+                </a></li>
+                <li><a href="#" data-page="generator" class="nav-link">
+                    <span class="nav-icon">🎨</span>
+                    <span class="nav-text">AI Generator</span>
+                </a></li>
+                <li><a href="#" data-page="translation" class="nav-link">
+                    <span class="nav-icon">🌐</span>
+                    <span class="nav-text">Translation</span>
+                </a></li>
+                <li><a href="#" data-page="profile" class="nav-link">
+                    <span class="nav-icon">👤</span>
+                    <span class="nav-text">Profile</span>
+                </a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+        <!-- Top Navigation -->
+        <header class="top-nav">
+            <div class="search-container">
+                <input type="text" placeholder="Search topics, subjects..." class="search-input" id="searchInput">
+                <button class="search-btn">🔍</button>
+            </div>
+            <div class="user-info">
+                <div class="theme-toggle" id="themeToggle">🌙</div>
+                <div class="user-avatar">S</div>
+            </div>
+        </header>
+
+        <!-- Dashboard Page -->
+        <div class="page active" id="dashboard">
+            <div class="page-header">
+                <h1>Welcome back, Student! 👋</h1>
+                <p>Ready to continue your learning journey?</p>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">🔥</div>
+                    <div class="stat-content">
+                        <h3 id="streakCounter">12</h3>
+                        <p>Day Streak</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📈</div>
+                    <div class="stat-content">
+                        <h3 id="progressCounter">58%</h3>
+                        <p>Overall Progress</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🏆</div>
+                    <div class="stat-content">
+                        <h3 id="achievementCounter">3</h3>
+                        <p>Achievements</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📚</div>
+                    <div class="stat-content">
+                        <h3 id="subjectCounter">3</h3>
+                        <p>Active Subjects</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="dashboard-section">
+                    <h2>Your Progress</h2>
+                    <div class="progress-chart-container" style="position: relative; height: 300px;">
+                        <canvas id="progressChart"></canvas>
+                    </div>
+                </div>
+                <div class="dashboard-section">
+                    <h2>Recent Activities</h2>
+                    <div class="activity-list" id="activityList">
+                        <div class="activity-item">
+                            <div class="activity-icon">📐</div>
+                            <div class="activity-content">
+                                <p>Completed Algebra Quiz</p>
+                                <span>2 hours ago</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">🔬</div>
+                            <div class="activity-content">
+                                <p>Studied Chemistry Basics</p>
+                                <span>1 day ago</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">📚</div>
+                            <div class="activity-content">
+                                <p>Read World Wars Chapter</p>
+                                <span>2 days ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Chat Assistant Page -->
+        <div class="page" id="chat">
+            <div class="chat-container">
+                <div class="chat-header">
+                    <h2>AI Learning Assistant</h2>
+                    <button class="btn btn--secondary" id="clearChat">Clear Chat</button>
+                </div>
+                <div class="chat-messages" id="chatMessages">
+                    <!-- Messages will be populated by JavaScript -->
+                </div>
+                <div class="chat-input-container">
+                    <div class="chat-input-wrapper">
+                        <input type="text" placeholder="Ask me anything about your studies..." class="chat-input" id="chatInput">
+                        <button class="chat-send-btn" id="chatSendBtn">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Library Page -->
+        <div class="page" id="library">
+            <div class="page-header">
+                <h1>Content Library</h1>
+                <p>Explore subjects and topics tailored to your learning level</p>
+            </div>
+            <div class="library-filters">
+                <select class="form-control" id="difficultyFilter">
+                    <option value="">All Difficulty Levels</option>
+                    <option value="beginner">Beginner</option>
+                    <option value="intermediate">Intermediate</option>
+                    <option value="advanced">Advanced</option>
+                </select>
+            </div>
+            <div class="subjects-grid" id="subjectsGrid">
+                <!-- Subjects will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Interactive Learning Page -->
+        <div class="page" id="learning">
+            <div class="learning-container">
+                <div class="learning-header">
+                    <h2 id="learningTopicTitle">Select a topic to start learning</h2>
+                    <div class="learning-controls">
+                        <button class="btn btn--outline" id="bookmarkBtn">📑 Bookmark</button>
+                        <button class="btn btn--outline" id="notesBtn">📝 Notes</button>
+                    </div>
+                </div>
+                <div class="learning-content" id="learningContent">
+                    <div class="empty-state">
+                        <div class="empty-icon">🎓</div>
+                        <h3>Choose a topic from the Content Library</h3>
+                        <p>Select any subject and topic to start your interactive learning experience</p>
+                        <button class="btn btn--primary" data-page="library">Browse Library</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scientific Calculator Page -->
+        <div class="page" id="calculator">
+            <div class="calculator-container">
+                <div class="calculator-header">
+                    <h2>Scientific Calculator</h2>
+                    <button class="btn btn--outline" id="clearHistory">Clear History</button>
+                </div>
+                <div class="calculator-grid">
+                    <div class="calculator-main">
+                        <div class="calculator-display">
+                            <input type="text" class="calc-input" id="calcDisplay" readonly>
+                        </div>
+                        <div class="calculator-buttons" id="calculatorButtons">
+                            <!-- Buttons will be generated by JavaScript -->
+                        </div>
+                    </div>
+                    <div class="calculator-history">
+                        <h3>History</h3>
+                        <div class="history-list" id="historyList">
+                            <!-- History will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Generator Page -->
+        <div class="page" id="generator">
+            <div class="generator-container">
+                <div class="page-header">
+                    <h1>AI Content Generator</h1>
+                    <p>Create images and videos for your learning materials</p>
+                </div>
+                <div class="generator-tabs">
+                    <button class="tab-btn active" data-tab="image">Image Generator</button>
+                    <button class="tab-btn" data-tab="video">Video Generator</button>
+                </div>
+                
+                <!-- Image Generator Tab -->
+                <div class="tab-content active" id="imageTab">
+                    <div class="generator-form">
+                        <div class="form-group">
+                            <label class="form-label">Describe the image you want to generate:</label>
+                            <textarea class="form-control" id="imagePrompt" placeholder="A diagram showing the water cycle with labels..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Style:</label>
+                            <select class="form-control" id="imageStyle">
+                                <option value="realistic">Realistic</option>
+                                <option value="cartoon">Cartoon</option>
+                                <option value="diagram">Diagram</option>
+                                <option value="sketch">Sketch</option>
+                            </select>
+                        </div>
+                        <button class="btn btn--primary" id="generateImage">Generate Image</button>
+                    </div>
+                    <div class="generated-content" id="imageResults">
+                        <div class="empty-state">
+                            <div class="empty-icon">🎨</div>
+                            <p>Generated images will appear here</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video Generator Tab -->
+                <div class="tab-content" id="videoTab">
+                    <div class="generator-form">
+                        <div class="form-group">
+                            <label class="form-label">Describe the educational video:</label>
+                            <textarea class="form-control" id="videoPrompt" placeholder="An animation explaining photosynthesis process..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Duration:</label>
+                            <select class="form-control" id="videoDuration">
+                                <option value="30">30 seconds</option>
+                                <option value="60">1 minute</option>
+                                <option value="120">2 minutes</option>
+                            </select>
+                        </div>
+                        <button class="btn btn--primary" id="generateVideo">Generate Video</button>
+                    </div>
+                    <div class="generated-content" id="videoResults">
+                        <div class="empty-state">
+                            <div class="empty-icon">🎬</div>
+                            <p>Generated videos will appear here</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Translation Hub Page -->
+        <div class="page" id="translation">
+            <div class="translation-container">
+                <div class="page-header">
+                    <h1>Translation Hub</h1>
+                    <p>Translate content and learn new languages</p>
+                </div>
+                <div class="translation-interface">
+                    <div class="translation-form">
+                        <div class="language-selector">
+                            <select class="form-control" id="sourceLanguage">
+                                <option value="en">English</option>
+                                <option value="es">Spanish</option>
+                                <option value="fr">French</option>
+                                <option value="de">German</option>
+                                <option value="zh">Chinese</option>
+                                <option value="ja">Japanese</option>
+                            </select>
+                            <button class="swap-languages" id="swapLanguages">⇄</button>
+                            <select class="form-control" id="targetLanguage">
+                                <option value="es">Spanish</option>
+                                <option value="en">English</option>
+                                <option value="fr">French</option>
+                                <option value="de">German</option>
+                                <option value="zh">Chinese</option>
+                                <option value="ja">Japanese</option>
+                            </select>
+                        </div>
+                        <div class="translation-boxes">
+                            <div class="translation-box">
+                                <textarea class="form-control" id="sourceText" placeholder="Enter text to translate..."></textarea>
+                            </div>
+                            <div class="translation-box">
+                                <textarea class="form-control" id="translatedText" placeholder="Translation will appear here..." readonly></textarea>
+                            </div>
+                        </div>
+                        <button class="btn btn--primary" id="translateBtn">Translate</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Page -->
+        <div class="page" id="profile">
+            <div class="profile-container">
+                <div class="page-header">
+                    <h1>Profile & Settings</h1>
+                    <p>Manage your learning preferences and account settings</p>
+                </div>
+                <div class="profile-grid">
+                    <div class="profile-section">
+                        <h3>Learning Stats</h3>
+                        <div class="stat-item">
+                            <span>Total Study Time:</span>
+                            <span>45 hours</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Topics Completed:</span>
+                            <span>12</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Quizzes Taken:</span>
+                            <span>28</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Current Streak:</span>
+                            <span>12 days</span>
+                        </div>
+                    </div>
+                    <div class="profile-section">
+                        <h3>Achievements</h3>
+                        <div class="achievements-list">
+                            <div class="achievement-badge">🎯 First Week</div>
+                            <div class="achievement-badge">🏆 Quiz Master</div>
+                            <div class="achievement-badge">🤔 Curious Learner</div>
+                        </div>
+                    </div>
+                    <div class="profile-section">
+                        <h3>Settings</h3>
+                        <div class="settings-list">
+                            <div class="setting-item">
+                                <label>Difficulty Level:</label>
+                                <select class="form-control">
+                                    <option>Auto-adjust</option>
+                                    <option>Beginner</option>
+                                    <option>Intermediate</option>
+                                    <option>Advanced</option>
+                                </select>
+                            </div>
+                            <div class="setting-item">
+                                <label>Study Reminders:</label>
+                                <select class="form-control">
+                                    <option>Daily</option>
+                                    <option>Weekly</option>
+                                    <option>Off</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- AI Mentor Character -->
+    <div class="ai-mentor" id="aiMentor">
+        <div class="mentor-character">
+            <div class="mentor-face">
+                <div class="mentor-eyes">
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                </div>
+                <div class="mentor-mouth"></div>
+            </div>
+        </div>
+        <div class="speech-bubble hidden" id="speechBubble">
+            <p id="speechText">Hello! I'm Mentara, your AI learning companion. Click on me to get started!</p>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay hidden" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <p id="loadingText">Loading...</p>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
